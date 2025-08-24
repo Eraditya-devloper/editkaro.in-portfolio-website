@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editkaro.in - Video Editing & Social Media Agency</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom styles for animations and aesthetic touches */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #e5e5e5;
+        }
+
+        /* Gradient text effect */
+        .gradient-text {
+            background: linear-gradient(90deg, #f472b6, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Animation for elements fading in on scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Active filter button style */
+        .filter-btn.active {
+            background-color: #f472b6;
+            color: #171717;
+        }
+        
+        /* Video gallery item transition */
+        .video-item {
+            transition: transform 0.3s ease, opacity 0.5s ease;
+        }
+        
+        /* Video lightbox styles */
+        #video-lightbox {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        #video-lightbox iframe {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-50 backdrop-blur-lg border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold tracking-tighter gradient-text">Editkaro.in</a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#work" class="text-gray-300 hover:text-pink-400 transition-colors duration-300">Work</a>
+                <a href="#about" class="text-gray-300 hover:text-pink-400 transition-colors duration-300">About</a>
+                <a href="#contact" class="text-gray-300 hover:text-pink-400 transition-colors duration-300">Contact</a>
+            </nav>
+            <button id="mobile-menu-btn" class="md:hidden focus:outline-none">
+                <svg class="w-6 h-6 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#work" class="block py-2 text-gray-300 hover:text-pink-400">Work</a>
+            <a href="#about" class="block py-2 text-gray-300 hover:text-pink-400">About</a>
+            <a href="#contact" class="block py-2 text-gray-300 hover:text-pink-400">Contact</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="min-h-screen flex items-center justify-center text-center pt-20 bg-grid-gray-700/[0.2]">
+             <div class="absolute pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+            <div class="container mx-auto px-6 z-10">
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter mb-4 reveal">
+                    Stories that <span class="gradient-text">Captivate</span>.
+                </h1>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-400 mb-8 reveal" style="transition-delay: 200ms;">We are a creative agency specializing in video editing and social media marketing, turning your vision into compelling visual narratives that drive engagement.</p>
+                <a href="#work" class="bg-pink-500 text-white font-bold py-3 px-8 rounded-full hover:bg-pink-600 transition-all duration-300 transform hover:scale-105 inline-block reveal" style="transition-delay: 400ms;">View Our Work</a>
+            </div>
+        </section>
+
+        <!-- Portfolio/Work Section -->
+        <section id="work" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 reveal">
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tight">Our Portfolio</h2>
+                    <p class="text-gray-400 mt-2">Explore our diverse range of video editing projects.</p>
+                </div>
+
+                <!-- Filter Buttons -->
+                <div id="filter-buttons" class="flex flex-wrap justify-center gap-2 md:gap-4 mb-12 reveal">
+                    <button class="filter-btn active py-2 px-5 rounded-full text-sm font-semibold transition-all duration-300" data-filter="all">All</button>
+                    <button class="filter-btn py-2 px-5 rounded-full text-sm font-semibold transition-all duration-300" data-filter="short-form">Short-form</button>
+                    <button class="filter-btn py-2 px-5 rounded-full text-sm font-semibold transition-all duration-300" data-filter="long-form">Long-form</button>
+                    <button class="filter-btn py-2 px-5 rounded-full text-sm font-semibold transition-all duration-300" data-filter="gaming">Gaming</button>
+                    <button class="filter-btn py-2 px-5 rounded-full text-sm font-semibold transition-all duration-300" data-filter="football">Football Edits</button>
+                    <button class="filter-btn py-2 px-5 rounded-full text-sm font-semibold transition-all duration-300" data-filter="ecommerce">eCommerce</button>
+                    <button class="filter-btn py-2 px-5 rounded-full text-sm font-semibold transition-all duration-300" data-filter="documentary">Documentary</button>
+                    <button class="filter-btn py-2 px-5 rounded-full text-sm font-semibold transition-all duration-300" data-filter="anime">Anime</button>
+                </div>
+
+                <!-- Video Gallery -->
+                <div id="video-gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Video items will be dynamically populated here by JS, but I'll add them statically for demonstration -->
+                    <div class="video-item group reveal" data-category="short-form" data-video-src="https://www.youtube.com/embed/YAFUyPp_238?si=3LaT7Cx8eFMxZyxK">
+                        <div class="relative overflow-hidden rounded-lg cursor-pointer">
+                            <img src="https://placehold.co/600x400/171717/f472b6?text=Short+Form" alt="Short Form Video" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-semibold mt-4">Viral Reel Edit</h3>
+                        <p class="text-gray-400">Short-form</p>
+                    </div>
+                    
+                    <div class="video-item group reveal" data-category="gaming" data-video-src="https://www.youtube.com/embed/bdFuAXURuSc?si=e_TtoWONZcNdJ4ER">
+                        <div class="relative overflow-hidden rounded-lg cursor-pointer">
+                            <img src="https://placehold.co/600x400/171717/a78bfa?text=Gaming" alt="Gaming Video" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-semibold mt-4">Gaming Montage</h3>
+                        <p class="text-gray-400">Gaming</p>
+                    </div>
+
+                    <div class="video-item group reveal" data-category="ecommerce" data-video-src="https://www.youtube.com/embed/hWVJucr3Il8?si=_PGC-iB1MLK5Sv2W">
+                        <div class="relative overflow-hidden rounded-lg cursor-pointer">
+                            <img src="https://placehold.co/600x400/171717/f472b6?text=eCommerce" alt="eCommerce Ad" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-semibold mt-4">Product Showcase Ad</h3>
+                        <p class="text-gray-400">eCommerce</p>
+                    </div>
+
+                     <div class="video-item group reveal" data-category="long-form" data-video-src="https://www.youtube.com/embed/IjMVme1aDWg?si=v0OHpsDutDilgHK3">
+                        <div class="relative overflow-hidden rounded-lg cursor-pointer">
+                            <img src="https://placehold.co/600x400/171717/a78bfa?text=Long+Form" alt="Long Form Video" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-semibold mt-4">YouTube Documentary</h3>
+                        <p class="text-gray-400">Long-form</p>
+                    </div>
+
+                    <div class="video-item group reveal" data-category="football" data-video-src="https://www.youtube.com/embed/yxQHgVhxfMc?si=XlUp0OVD_kJn9FQF">
+                        <div class="relative overflow-hidden rounded-lg cursor-pointer">
+                           <img src="https://placehold.co/600x400/171717/f472b6?text=Football" alt="Football Edit" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-semibold mt-4">Soccer Skills Compilation</h3>
+                        <p class="text-gray-400">Football Edits</p>
+                    </div>
+
+                    <div class="video-item group reveal" data-category="anime" data-video-src="https://www.youtube.com/embed/PU54b7-B9xQ?si=oQnzKoFNBajZOrJD">
+                        <div class="relative overflow-hidden rounded-lg cursor-pointer">
+                            <img src="https://placehold.co/600x400/171717/a78bfa?text=Anime" alt="Anime Edit" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-semibold mt-4">Anime Music Video (AMV)</h3>
+                        <p class="text-gray-400">Anime</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Section -->
+        <section id="about" class="py-20 bg-gray-900/50">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="reveal">
+                        <h2 class="text-4xl font-bold tracking-tight mb-4">Who We Are</h2>
+                        <p class="text-gray-400 mb-4">Editkaro.in is more than just an agency; we're a team of passionate storytellers and digital strategists. We believe in the power of video to connect, inspire, and convert.</p>
+                        <p class="text-gray-400">Our mission is to provide top-tier video editing and social media marketing services that help brands grow and stand out in a crowded digital landscape. We handle everything from quick, snappy social media clips to in-depth documentary-style features.</p>
+                    </div>
+                    <div class="reveal">
+                        <img src="./images/Gemini_Generated_Image_91hbrp91hbrp91hb.png" alt="Our Team" class="rounded-lg shadow-2xl">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20">
+            <div class="container mx-auto px-6 text-center">
+                 <div class="reveal">
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tight">Let's Create Together</h2>
+                    <p class="text-gray-400 mt-2 max-w-2xl mx-auto">Have a project in mind? We'd love to hear about it. Reach out and let's discuss how we can bring your ideas to life.</p>
+                </div>
+                <div class="mt-12 max-w-xl mx-auto reveal">
+                    <form action="#" method="POST">
+                        <div class="grid grid-cols-1 gap-6">
+                            <input type="text" placeholder="Your Name" class="w-full bg-gray-900 border border-gray-700 rounded-md py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-pink-500">
+                            <input type="email" placeholder="Your Email" class="w-full bg-gray-900 border border-gray-700 rounded-md py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-pink-500">
+                            <textarea placeholder="Your Message" rows="5" class="w-full bg-gray-900 border border-gray-700 rounded-md py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-pink-500"></textarea>
+                            <button type="submit" class="bg-pink-500 text-white font-bold py-3 px-8 rounded-full hover:bg-pink-600 transition-all duration-300 transform hover:scale-105">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 py-8">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p>&copy; 2025 Editkaro.in. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Video Lightbox Modal -->
+    <div id="video-lightbox" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 opacity-0 pointer-events-none">
+        <div class="relative w-full max-w-4xl mx-4">
+            <button id="close-lightbox" class="absolute -top-12 right-0 text-white text-4xl">&times;</button>
+            <div class="aspect-w-16 aspect-h-9">
+                 <iframe id="video-player" class="rounded-lg" width="100%" height="100%" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // --- Mobile Menu ---
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // --- Scroll Animations ---
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal').forEach(el => {
+                observer.observe(el);
+            });
+
+            // --- Portfolio Filtering ---
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const videoItems = document.querySelectorAll('.video-item');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button style
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    const filter = button.getAttribute('data-filter');
+
+                    videoItems.forEach(item => {
+                        item.style.transform = 'scale(0.9)';
+                        item.style.opacity = '0';
+                        setTimeout(() => {
+                             if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                                item.style.display = 'block';
+                                setTimeout(() => {
+                                    item.style.transform = 'scale(1)';
+                                    item.style.opacity = '1';
+                                }, 50);
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        }, 300);
+                    });
+                });
+            });
+            
+            // --- Video Lightbox ---
+            const lightbox = document.getElementById('video-lightbox');
+            const closeLightboxBtn = document.getElementById('close-lightbox');
+            const videoPlayer = document.getElementById('video-player');
+
+            videoItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const videoSrc = item.getAttribute('data-video-src');
+                    videoPlayer.setAttribute('src', videoSrc + "?autoplay=1"); // Autoplay when opened
+                    lightbox.classList.remove('opacity-0', 'pointer-events-none');
+                });
+            });
+
+            function closeLightbox() {
+                videoPlayer.setAttribute('src', ''); // Stop video
+                lightbox.classList.add('opacity-0', 'pointer-events-none');
+            }
+
+            closeLightboxBtn.addEventListener('click', closeLightbox);
+            // Also close lightbox if clicking on the background
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
